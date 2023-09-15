@@ -1,5 +1,14 @@
 ## Escuela Colombiana de Ingeniería
 
+# Equipo de Desarrollo
+
+Este proyecto fue desarrollado por el equipo compuesto por:
+
+- Daniel Fernando Moreno Cerón
+- Daniel Esteban Pérez Bohorquez
+- Juan Francisco Terán Román
+- Juan Felipe Vivas Manrique
+
 ## Arquitecturas de Software
 
 # Componentes y conectores - Parte I.
