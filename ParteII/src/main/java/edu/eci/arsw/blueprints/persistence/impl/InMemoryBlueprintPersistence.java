@@ -6,6 +6,7 @@
 package edu.eci.arsw.blueprints.persistence.impl;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -58,7 +59,14 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence {
 
 	@Override
 	public Set<Blueprint> getBlueprintsByAuthor(String author) throws BlueprintNotFoundException {
-		throw new BlueprintNotFoundException("No estÃ¡");
+		Set<Blueprint> blueprintsByAuthor = new HashSet<>();
+		for (Blueprint blueprint : blueprints.values()) {
+			if (blueprint.getName() == author) {
+				blueprintsByAuthor.add(blueprint);
+			} else
+				throw new BlueprintNotFoundException("No plans have been found in that person's name.");
+		}
+		return blueprintsByAuthor;
 	}
 
 }
