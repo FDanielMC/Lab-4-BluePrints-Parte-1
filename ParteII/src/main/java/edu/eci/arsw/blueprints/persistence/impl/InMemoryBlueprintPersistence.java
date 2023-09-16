@@ -46,13 +46,14 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence {
 
 	@Override
 	public Blueprint getBlueprint(String author, String bprintname) throws BlueprintNotFoundException {
-		Blueprint bluePrint = new Blueprint(author, bprintname);
+		Blueprint bluePrint = null;
 		for (Blueprint blueprint : blueprints.values()) {
-			if ((blueprint.getName() == bluePrint.getName()) && (blueprint.getAuthor() == bluePrint.getAuthor())) {
+			if ((blueprint.getName() == bprintname) && (blueprint.getAuthor() == author)) {
 				bluePrint = blueprint;
-			} else
-				throw new BlueprintNotFoundException("The plan you are looking for cannot be found.");
+			}
 		}
+		if (bluePrint.equals(null))
+			throw new BlueprintNotFoundException("The plan you are looking for cannot be found.");
 
 		return bluePrint;
 	}
@@ -63,9 +64,10 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence {
 		for (Blueprint blueprint : blueprints.values()) {
 			if (blueprint.getName() == author) {
 				blueprintsByAuthor.add(blueprint);
-			} else
-				throw new BlueprintNotFoundException("No plans have been found in that person's name.");
+			}
 		}
+		if (blueprintsByAuthor.isEmpty())
+			throw new BlueprintNotFoundException("No plans have been found in that person's name.");
 		return blueprintsByAuthor;
 	}
 
