@@ -28,6 +28,10 @@ public class Blueprint {
 	public Blueprint() {
 	}
 
+	public void newBluePrint() {
+		points = new ArrayList<>();
+	}
+
 	public String getName() {
 		return name;
 	}
