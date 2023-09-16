@@ -19,7 +19,7 @@ import edu.eci.arsw.blueprints.persistence.BlueprintsPersistence;
 
 /**
  *
- * @author hcadavid
+ * @author Guardianes de la Galaxia
  */
 @Service
 public class InMemoryBlueprintPersistence implements BlueprintsPersistence {
