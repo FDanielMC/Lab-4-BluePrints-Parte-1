@@ -10,6 +10,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import edu.eci.arsw.blueprints.filters.BlueprintFilter;
 import edu.eci.arsw.blueprints.model.Blueprint;
 import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
 import edu.eci.arsw.blueprints.persistence.BlueprintPersistenceException;
@@ -24,6 +25,9 @@ public class BlueprintsServices {
 
 	@Autowired
 	BlueprintsPersistence bpp;
+
+	@Autowired
+	BlueprintFilter bpf;
 
 	public void addNewBlueprint(Blueprint bp) throws BlueprintPersistenceException {
 		this.bpp.saveBlueprint(bp);
@@ -58,6 +62,10 @@ public class BlueprintsServices {
 	 */
 	public Set<Blueprint> getBlueprintsByAuthor(String author) throws BlueprintNotFoundException {
 		return this.bpp.getBlueprintsByAuthor(author);
+	}
+
+	public Blueprint bluePrintFiltering(Blueprint bp) {
+		return bpf.bluePrintFiltering(bp);
 	}
 
 }
