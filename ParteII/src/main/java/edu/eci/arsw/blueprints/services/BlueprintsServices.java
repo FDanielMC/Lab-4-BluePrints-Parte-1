@@ -8,7 +8,7 @@ package edu.eci.arsw.blueprints.services;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import edu.eci.arsw.blueprints.model.Blueprint;
 import edu.eci.arsw.blueprints.persistence.BlueprintNotFoundException;
@@ -19,22 +19,23 @@ import edu.eci.arsw.blueprints.persistence.BlueprintsPersistence;
  *
  * @author hcadavid
  */
-@Service
+@Component
 public class BlueprintsServices {
 
-	BlueprintsPersistence bpp;
-
 	@Autowired
-	public BlueprintsServices(BlueprintsPersistence bpp) {
-		this.bpp = bpp;
-	}
+	BlueprintsPersistence bpp;
 
 	public void addNewBlueprint(Blueprint bp) throws BlueprintPersistenceException {
 		this.bpp.saveBlueprint(bp);
 	}
 
-	public Set<Blueprint> getAllBlueprints() {
-		return null;
+	/**
+	 * 
+	 * @return all the blueprints
+	 * @throws BlueprintNotFoundException if there is no such blueprint
+	 */
+	public Set<Blueprint> getAllBlueprints() throws BlueprintNotFoundException {
+		return this.bpp.getAllBlueprints();
 	}
 
 	/**
@@ -45,7 +46,7 @@ public class BlueprintsServices {
 	 * @throws BlueprintNotFoundException if there is no such blueprint
 	 */
 	public Blueprint getBlueprint(String author, String name) throws BlueprintNotFoundException {
-		return bpp.getBlueprint(author, name);
+		return this.bpp.getBlueprint(author, name);
 
 	}
 
@@ -56,7 +57,7 @@ public class BlueprintsServices {
 	 * @throws BlueprintNotFoundException if the given author doesn't exist
 	 */
 	public Set<Blueprint> getBlueprintsByAuthor(String author) throws BlueprintNotFoundException {
-		return bpp.getBlueprintsByAuthor(author);
+		return this.bpp.getBlueprintsByAuthor(author);
 	}
 
 }

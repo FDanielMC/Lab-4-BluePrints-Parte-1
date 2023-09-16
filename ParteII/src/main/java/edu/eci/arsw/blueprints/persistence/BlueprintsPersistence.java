@@ -7,12 +7,15 @@ package edu.eci.arsw.blueprints.persistence;
 
 import java.util.Set;
 
+import org.springframework.stereotype.Service;
+
 import edu.eci.arsw.blueprints.model.Blueprint;
 
 /**
  *
  * @author hcadavid
  */
+@Service
 public interface BlueprintsPersistence {
 
 	/**
@@ -23,6 +26,13 @@ public interface BlueprintsPersistence {
 	 *                                       persistence error occurs.
 	 */
 	public void saveBlueprint(Blueprint bp) throws BlueprintPersistenceException;
+
+	/**
+	 * 
+	 * @return all the blueprints
+	 * @throws BlueprintNotFoundException if there is no such blueprint
+	 */
+	public Set<Blueprint> getAllBlueprints() throws BlueprintNotFoundException;
 
 	/**
 	 * 

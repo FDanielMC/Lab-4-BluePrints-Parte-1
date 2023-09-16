@@ -36,6 +36,16 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence {
 	}
 
 	@Override
+	public Set<Blueprint> getAllBlueprints() throws BlueprintNotFoundException {
+		Set<Blueprint> bluePrints;
+		if (!blueprints.isEmpty())
+			bluePrints = new HashSet<>(blueprints.values());
+		else
+			throw new BlueprintNotFoundException("There are no registered plans.");
+		return bluePrints;
+	}
+
+	@Override
 	public void saveBlueprint(Blueprint bp) throws BlueprintPersistenceException {
 		if (blueprints.containsKey(new Tuple<>(bp.getAuthor(), bp.getName()))) {
 			throw new BlueprintPersistenceException("The given blueprint already exists: " + bp);
@@ -61,14 +71,13 @@ public class InMemoryBlueprintPersistence implements BlueprintsPersistence {
 	@Override
 	public Set<Blueprint> getBlueprintsByAuthor(String author) throws BlueprintNotFoundException {
 		Set<Blueprint> blueprintsByAuthor = new HashSet<>();
-		for (Blueprint blueprint : blueprints.values()) {
-			if (blueprint.getName() == author) {
-				blueprintsByAuthor.add(blueprint);
+		for (Tuple tuple : blueprints.keySet()) {
+			if (tuple.getElem1() == author) {
+				blueprintsByAuthor.add(blueprints.get(tuple));
 			}
 		}
 		if (blueprintsByAuthor.isEmpty())
 			throw new BlueprintNotFoundException("No plans have been found in that person's name.");
 		return blueprintsByAuthor;
 	}
-
 }
